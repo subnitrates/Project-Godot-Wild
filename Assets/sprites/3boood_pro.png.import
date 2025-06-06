@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ds13wh0xx2v1s"
-path="res://.godot/imported/3boood_pro.png-0f487ba9347c23f8be4a3c77d1ee0bb4.ctex"
+uid="uid://c35am3h4benp4"
+path="res://.godot/imported/3boood_pro.png-866ae11b927e07f3a06f20ad1367718e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/sprites/3boood_pro.png"
-dest_files=["res://.godot/imported/3boood_pro.png-0f487ba9347c23f8be4a3c77d1ee0bb4.ctex"]
+source_file="res://assets/sprites/3boood_pro.png"
+dest_files=["res://.godot/imported/3boood_pro.png-866ae11b927e07f3a06f20ad1367718e.ctex"]
 
 [params]
 
