@@ -1,7 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://ch6a7fqe8jlgc"]
+[gd_scene load_steps=18 format=3 uid="uid://ch6a7fqe8jlgc"]
 
 [ext_resource type="Script" uid="uid://doqasgmcrpbyw" path="res://Player/Player.gd" id="1_q3lat"]
 [ext_resource type="Texture2D" uid="uid://c35am3h4benp4" path="res://Assets/sprites/3boood_pro.png" id="2_tok1r"]
+[ext_resource type="PackedScene" uid="uid://bfv5a5lsh0cyj" path="res://Player/Guns/hover_gun.tscn" id="3_tok1r"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ddoul"]
 radius = 4.0
@@ -125,7 +126,6 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D"]
-position = Vector2(345, 280)
 script = ExtResource("1_q3lat")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -135,6 +135,9 @@ shape = SubResource("CapsuleShape2D_ddoul")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_8sa4y")
 animation = &"fall"
-frame_progress = 0.537124
+frame_progress = 0.582353
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="HoverGun" parent="." instance=ExtResource("3_tok1r")]
+position = Vector2(11, 3)
