@@ -1,7 +1,7 @@
 class_name PlayerMoveState
 extends PlayerState
 
-const SPEED: float = 400.0
+const SPEED: float = 200.0
 
 func enter():
 	if player.animated_sprite_2d:

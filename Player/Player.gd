@@ -21,6 +21,3 @@ func change_state(new_state_instance: PlayerState):
 	
 	current_state = new_state_instance
 	current_state.player = self
-	current_state.enter
-	
-	
