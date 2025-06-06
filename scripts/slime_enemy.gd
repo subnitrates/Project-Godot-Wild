@@ -10,7 +10,7 @@ enum EnemyStates {
 @export var max_idle_time: float = 1.5 
 @export var wander_distance: float = 50
 @export var max_health: int = 5
-@export var wander_move_speed: int = 25 ## The speed of this enemy when they're wandering about, in pixels/sec
+@export var wander_move_speed: int = 50 ## The speed of this enemy when they're wandering about, in pixels/sec
 @export var chase_move_speed: int = 50 ## The speed of this enemy when they're chasing the player, in pixels/sec
 
 @onready var sprite_anim_player: AnimatedSprite2D = $AnimatedSprite2D
@@ -42,7 +42,7 @@ func _ready() -> void:
 	player_detection.body_entered.connect(_on_player_spotted)
 	player_detection.body_exited.connect(_on_player_lost)
 	
-	_enter_idle_state()
+	call_deferred("_enter_idle_state")
 
 func _physics_process(_delta: float) -> void: 
 	match curr_enemy_state:
@@ -87,14 +87,13 @@ func _on_wander_target_reached_or_timeout() -> void:
 
 func _chase_player() -> void:
 	if not player_to_chase:
-		push_error("PLAYER IS NULL, THIS SHOULD NEVER HAPPEN")
 		curr_enemy_state = EnemyStates.IDLE
 		return
 	
 	var chase_dir: Vector2 = (player_to_chase.global_position - self.global_position).normalized()
 	velocity = chase_dir * chase_move_speed
 	move_and_slide()
-	
+
 func _on_player_spotted(player: Node2D) -> void:
 	if not player is Player: return
 	if curr_enemy_state == EnemyStates.CHASING: return
@@ -109,7 +108,7 @@ func _on_player_spotted(player: Node2D) -> void:
 func _on_player_lost(body: Node2D) -> void:
 	if body == player_to_chase:
 		player_to_chase = null
-		_enter_idle_state() 
+		call_deferred("_enter_idle_state")
 
 func take_damage(damage_amount: int) -> void:
 	curr_health -= damage_amount

@@ -90,7 +90,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_30a25"]
-radius = 64.0
+radius = 146.168
 
 [node name="SlimeEnemy" type="CharacterBody2D" groups=["enemies"]]
 motion_mode = 1
@@ -108,7 +108,7 @@ position = Vector2(0, -5)
 sprite_frames = SubResource("SpriteFrames_4k86d")
 animation = &"Idle"
 autoplay = "Idle"
-frame_progress = 0.984789
+frame_progress = 0.950963
 
 [node name="SpawnLocation" type="Marker2D" parent="."]
 
