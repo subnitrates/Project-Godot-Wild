@@ -45,16 +45,13 @@ func _process(delta: float):
 	if stamina_regen_timer > 0:
 		stamina_regen_timer -= delta
 	elif stamina < max_stamina:
-		# Accumulate fractional regeneration
 		_stamina_regen_accumulator += stamina_regen_rate * delta
 		
-		# Only apply whole numbers to stamina
 		if _stamina_regen_accumulator >= 1.0:
 			var regen_amount = floor(_stamina_regen_accumulator)
 			stamina += regen_amount
 			_stamina_regen_accumulator -= regen_amount
-			# Debug print (you can remove this later)
-			print("Regenerated ", regen_amount, " stamina (accumulator: ", _stamina_regen_accumulator, ")")
+
 
 func use_stamina(amount: int) -> bool:
 	if stamina >= amount:

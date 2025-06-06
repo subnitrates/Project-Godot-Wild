@@ -1,15 +1,5 @@
 # TO DO List:
 	1. Code player
-		b. Dash
-			I. Animations
-			II. Code
-		c. Slash
-			I. Animations
-			II. Code
-		d. Health
-			II. Code
-		e. Stamina
-			II. Code
 
 	2. Code enemy
 		a. Movement

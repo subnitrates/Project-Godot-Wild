@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=4 uid="uid://swr86odgges0"]
+[gd_scene load_steps=4 format=4 uid="uid://swr86odgges0"]
 
 [ext_resource type="TileSet" uid="uid://dgfwwcql1hgcw" path="res://resources/tilesets/terrain.tres" id="1_errlg"]
 [ext_resource type="PackedScene" uid="uid://ch6a7fqe8jlgc" path="res://Player/Player.tscn" id="2_bl13t"]
+[ext_resource type="PackedScene" uid="uid://dlxqdcykpkql8" path="res://Items/coin.tscn" id="3_iyx0m"]
 
 [node name="Test" type="Node2D"]
 
@@ -11,3 +12,15 @@ tile_set = ExtResource("1_errlg")
 
 [node name="Player" parent="." instance=ExtResource("2_bl13t")]
 position = Vector2(94, -82)
+
+[node name="Coin" parent="." instance=ExtResource("3_iyx0m")]
+position = Vector2(37, -49)
+
+[node name="Coin2" parent="." instance=ExtResource("3_iyx0m")]
+position = Vector2(181, -50)
+
+[node name="Coin3" parent="." instance=ExtResource("3_iyx0m")]
+position = Vector2(40, -68)
+
+[node name="Coin4" parent="." instance=ExtResource("3_iyx0m")]
+position = Vector2(113, -56)

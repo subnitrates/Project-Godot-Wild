@@ -142,7 +142,7 @@ colors = PackedColorArray(0, 0.518512, 4.81307e-07, 1, 0, 1, 0, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_8g4oa"]
 gradient = SubResource("Gradient_ddoul")
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 motion_mode = 1
 script = ExtResource("1_q3lat")
 
@@ -187,7 +187,7 @@ nine_patch_stretch = true
 texture_under = SubResource("PlaceholderTexture2D_ddoul")
 texture_progress = SubResource("GradientTexture1D_6ysni")
 
-[node name="ColorRect2" type="ColorRect" parent="."]
+[node name="ColorRect2" type="ColorRect" parent="." groups=["player"]]
 offset_left = -21.0
 offset_top = -18.0
 offset_right = 21.0
