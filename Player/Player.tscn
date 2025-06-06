@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://ch6a7fqe8jlgc"]
 
 [ext_resource type="Script" uid="uid://doqasgmcrpbyw" path="res://Player/Player.gd" id="1_q3lat"]
-[ext_resource type="Texture2D" uid="uid://c35am3h4benp4" path="res://Assets/sprites/3boood_pro.png" id="2_tok1r"]
+[ext_resource type="Texture2D" uid="uid://c35am3h4benp4" path="res://assets/sprites/3boood_pro.png" id="2_tok1r"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ddoul"]
 radius = 4.0
@@ -125,7 +125,7 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D"]
-position = Vector2(345, 280)
+motion_mode = 1
 script = ExtResource("1_q3lat")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
