@@ -15,6 +15,10 @@ run/main_scene="uid://swr86odgges0"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+DebugDraw2D="*res://addons/debugdraw2d/DebugDraw2D.gd"
+
 [display]
 
 window/size/viewport_width=640
@@ -23,9 +27,9 @@ window/size/mode=3
 window/size/borderless=true
 window/stretch/mode="canvas_items"
 
-[global_group]
+[editor_plugins]
 
-player=""
+enabled=PackedStringArray("res://addons/debugdraw2d/plugin.cfg", "res://addons/godot_state_charts/plugin.cfg")
 
 [input]
 
