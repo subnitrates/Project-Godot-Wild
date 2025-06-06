@@ -108,12 +108,11 @@ position = Vector2(0, -5)
 sprite_frames = SubResource("SpriteFrames_4k86d")
 animation = &"Idle"
 autoplay = "Idle"
-frame_progress = 0.0119472
+frame_progress = 0.284707
 
 [node name="SpawnLocation" type="Marker2D" parent="."]
 
 [node name="PlayerDetection" type="Area2D" parent="."]
-monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection"]
 shape = SubResource("CircleShape2D_30a25")
