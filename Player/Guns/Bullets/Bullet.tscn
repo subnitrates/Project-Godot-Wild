@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cnyi2xj5ofb5e"]
+[gd_scene load_steps=4 format=3 uid="uid://cnyi2xj5ofb5e"]
 
 [ext_resource type="Script" uid="uid://bhe314wall2v" path="res://Player/Guns/Bullets/bullet.gd" id="1_dxpde"]
+[ext_resource type="Texture2D" uid="uid://cfp2ff5s8vpkm" path="res://Assets/sprites/Bullets.png" id="2_7xwm5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7xwm5"]
 
@@ -8,6 +9,7 @@
 script = ExtResource("1_dxpde")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_7xwm5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_7xwm5")

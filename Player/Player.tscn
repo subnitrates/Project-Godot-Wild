@@ -141,3 +141,8 @@ frame_progress = 0.682212
 
 [node name="HoverGun" parent="." instance=ExtResource("3_tok1r")]
 position = Vector2(11, 3)
+radius = null
+lerp_speed = null
+fire_rate = null
+recoil_strength = null
+muzzle_offset = null
