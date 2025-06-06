@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cnyi2xj5ofb5e"]
+
+[ext_resource type="Script" uid="uid://bhe314wall2v" path="res://Player/Guns/Bullets/bullet.gd" id="1_dxpde"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7xwm5"]
+
+[node name="Bullet" type="Area2D"]
+script = ExtResource("1_dxpde")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_7xwm5")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]

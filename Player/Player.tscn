@@ -136,7 +136,7 @@ shape = SubResource("CapsuleShape2D_ddoul")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_8sa4y")
 animation = &"fall"
-frame_progress = 0.582353
+frame_progress = 0.682212
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
