@@ -3,7 +3,8 @@
 [ext_resource type="Script" uid="uid://bhe314wall2v" path="res://Player/Guns/Bullets/bullet.gd" id="1_dxpde"]
 [ext_resource type="Texture2D" uid="uid://cfp2ff5s8vpkm" path="res://Assets/sprites/Bullets.png" id="2_7xwm5"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7xwm5"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_7xwm5"]
+radius = 6.7082
 
 [node name="Bullet" type="Area2D"]
 script = ExtResource("1_dxpde")
@@ -14,4 +15,7 @@ region_enabled = true
 region_rect = Rect2(0, 0, 16, 16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_7xwm5")
+scale = Vector2(0.719999, 0.4)
+shape = SubResource("CircleShape2D_7xwm5")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,7 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://hah352h3cvrb"]
+[gd_scene load_steps=16 format=3 uid="uid://cidsjxc3oyxu1"]
 
 [ext_resource type="Script" uid="uid://cyodqc1qdov6s" path="res://scripts/slime_enemy.gd" id="1_30a25"]
-[ext_resource type="Texture2D" uid="uid://d3yjsim6gj51p" path="res://assets/sprites/Slime.png" id="1_057e2"]
+[ext_resource type="Texture2D" uid="uid://d3yjsim6gj51p" path="res://Assets/sprites/Slime.png" id="1_057e2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fq0mw"]
 radius = 5.0
@@ -92,7 +92,7 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_30a25"]
 radius = 64.0
 
-[node name="SlimeEnemy" type="CharacterBody2D"]
+[node name="SlimeEnemy" type="CharacterBody2D" groups=["enemies"]]
 motion_mode = 1
 script = ExtResource("1_30a25")
 
@@ -108,7 +108,7 @@ position = Vector2(0, -5)
 sprite_frames = SubResource("SpriteFrames_4k86d")
 animation = &"Idle"
 autoplay = "Idle"
-frame_progress = 0.284707
+frame_progress = 0.984789
 
 [node name="SpawnLocation" type="Marker2D" parent="."]
 
