@@ -15,7 +15,12 @@ func exit():
 func update(delta:float):
 	var input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	
-	if input_direction == Vector2.ZERO:
+	if Input.is_action_just_pressed("dash") and player.dash_cooldown_timer <= 0:
+		if player.use_stamina(player.DASH_COST):
+			transition_to(PlayerDashState.new())
+		else:
+			print("Not enough stamina to dash!")
+	elif input_direction == Vector2.ZERO:
 		transition_to(PlayerIdleState.new())
 	else:
 		player.velocity = input_direction.normalized() * SPEED

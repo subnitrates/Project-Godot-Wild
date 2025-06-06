@@ -1,9 +1,5 @@
 # TO DO List:
-	
 	1. Code player
-		a. Movement
-			I. Animations
-			II. Code
 		b. Dash
 			I. Animations
 			II. Code

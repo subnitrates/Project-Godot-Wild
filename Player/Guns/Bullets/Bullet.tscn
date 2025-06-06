@@ -10,8 +10,8 @@ script = ExtResource("1_dxpde")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_7xwm5")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_7xwm5")
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
