@@ -3,7 +3,7 @@
 [ext_resource type="TileSet" uid="uid://dgfwwcql1hgcw" path="res://resources/tilesets/terrain.tres" id="1_errlg"]
 [ext_resource type="PackedScene" uid="uid://ch6a7fqe8jlgc" path="res://Player/Player.tscn" id="2_bl13t"]
 [ext_resource type="PackedScene" uid="uid://dlxqdcykpkql8" path="res://Items/coin.tscn" id="3_iyx0m"]
-[ext_resource type="PackedScene" uid="uid://cidsjxc3oyxu1" path="res://scenes/slime_enemy.tscn" id="4_74lek"]
+[ext_resource type="PackedScene" uid="uid://cidsjxc3oyxu1" path="res://Enemies/BaseSlime/slime_enemy.tscn" id="4_74lek"]
 
 [node name="Test" type="Node2D"]
 

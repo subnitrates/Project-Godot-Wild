@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://cidsjxc3oyxu1"]
 
-[ext_resource type="Script" uid="uid://cyodqc1qdov6s" path="res://scripts/slime_enemy.gd" id="1_30a25"]
+[ext_resource type="Script" uid="uid://cyodqc1qdov6s" path="res://Enemies/BaseSlime/slime_enemy.gd" id="1_30a25"]
 [ext_resource type="Texture2D" uid="uid://d3yjsim6gj51p" path="res://Assets/sprites/Slime.png" id="1_057e2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fq0mw"]
@@ -116,3 +116,9 @@ frame_progress = 0.950963
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection"]
 shape = SubResource("CircleShape2D_30a25")
+
+[node name="IdleTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="WanderTimer" type="Timer" parent="."]
+one_shot = true
