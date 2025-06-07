@@ -17,7 +17,6 @@ func collect_coin(collector: Node2D):
 	var player_stats: PlayerStats = collector.find_child("PlayerStats")
 	if player_stats:
 		player_stats.add_coins(coin_value)
-		print("PlayerStats coins are: ", player_stats.coins)
 		queue_free() 
 	else:
 		print("Warning: PlayerStats not found on player. Coin not collected.")
