@@ -34,4 +34,3 @@ func _on_level_changed(_old_value: int, new_value: int) -> void:
 func _on_experience_changed(_old_value: int, new_value: int, max_value: int) -> void:
 	level_progress_bar.max_value = max_value
 	level_progress_bar.value = new_value
-	print("exp change!")
