@@ -167,6 +167,7 @@ muzzle_offset = null
 script = ExtResource("4_ddoul")
 
 [node name="ColorRect2" type="ColorRect" parent="." groups=["player"]]
+z_index = 10
 custom_minimum_size = Vector2(44, 5)
 offset_left = -21.0
 offset_top = -20.0
@@ -187,7 +188,6 @@ theme_override_constants/margin_right = 1
 theme_override_constants/margin_bottom = 1
 
 [node name="Control" type="VBoxContainer" parent="ColorRect2/MarginContainer"]
-z_index = 10
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
