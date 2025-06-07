@@ -11,7 +11,7 @@ Code level 0 zone:
 		Slime spawner the player has to destroy? 
 		
 Player Systems:
-	EXP: animation to show exp? orbs to collect?
+	EXP: animation to show exp? orbs to collect on enemy base death?
 	Weapon: Switch to new weapons? General upgrade system or per weapon
 			style or mixed?
 	Bullet: Can use different ammo types, different damage? upgraded ammo
