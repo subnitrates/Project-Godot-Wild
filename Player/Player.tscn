@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://ch6a7fqe8jlgc"]
+[gd_scene load_steps=23 format=3 uid="uid://ch6a7fqe8jlgc"]
 
 [ext_resource type="Script" uid="uid://doqasgmcrpbyw" path="res://Player/Player.gd" id="1_q3lat"]
 [ext_resource type="Texture2D" uid="uid://c35am3h4benp4" path="res://Assets/sprites/3boood_pro.png" id="2_tok1r"]
@@ -126,8 +126,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ddoul"]
-
 [sub_resource type="Gradient" id="Gradient_8g4oa"]
 offsets = PackedFloat32Array(0.451977, 1)
 colors = PackedColorArray(0.629564, 1.96133e-06, 2.40654e-07, 1, 1, 0, 0, 1)
@@ -168,40 +166,47 @@ muzzle_offset = null
 [node name="PlayerStats" type="Node" parent="."]
 script = ExtResource("4_ddoul")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect2" type="ColorRect" parent="." groups=["player"]]
+custom_minimum_size = Vector2(44, 5)
 offset_left = -21.0
-offset_top = -14.0
+offset_top = -20.0
 offset_right = 21.0
-offset_bottom = -9.0
+offset_bottom = -16.0
 color = Color(0, 0, 0, 1)
 
-[node name="HPBar" type="TextureProgressBar" parent="ColorRect"]
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 1
+theme_override_constants/margin_top = 1
+theme_override_constants/margin_right = 1
+theme_override_constants/margin_bottom = 1
+
+[node name="Control" type="VBoxContainer" parent="ColorRect2/MarginContainer"]
+z_index = 10
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+
+[node name="HPBar" type="TextureProgressBar" parent="ColorRect2/MarginContainer/Control"]
 unique_name_in_owner = true
-layout_mode = 0
-offset_left = 1.0
-offset_top = 1.0
-offset_right = 41.0
-offset_bottom = 4.0
+custom_minimum_size = Vector2(42, 2)
+layout_mode = 2
+size_flags_vertical = 3
 value = 90.0
 nine_patch_stretch = true
-texture_under = SubResource("PlaceholderTexture2D_ddoul")
 texture_progress = SubResource("GradientTexture1D_6ysni")
 
-[node name="ColorRect2" type="ColorRect" parent="." groups=["player"]]
-offset_left = -21.0
-offset_top = -18.0
-offset_right = 21.0
-offset_bottom = -13.0
-color = Color(0, 0, 0, 1)
-
-[node name="StaminaBar" type="TextureProgressBar" parent="ColorRect2"]
+[node name="StaminaBar" type="TextureProgressBar" parent="ColorRect2/MarginContainer/Control"]
 unique_name_in_owner = true
-layout_mode = 0
-offset_left = 1.0
-offset_top = 1.0
-offset_right = 41.0
-offset_bottom = 4.0
+custom_minimum_size = Vector2(42, 1)
+layout_mode = 2
+size_flags_vertical = 3
 value = 90.0
 nine_patch_stretch = true
-texture_under = SubResource("PlaceholderTexture2D_ddoul")
 texture_progress = SubResource("GradientTexture1D_8g4oa")

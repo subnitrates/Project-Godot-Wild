@@ -18,11 +18,12 @@ config/icon="res://icon.svg"
 [autoload]
 
 DebugDraw2D="*res://addons/debugdraw2d/DebugDraw2D.gd"
+GameConstants="*res://Singletons/GameConstants.gd"
 
 [display]
 
-window/size/viewport_width=640
-window/size/viewport_height=480
+window/size/viewport_width=400
+window/size/viewport_height=225
 window/size/mode=3
 window/size/borderless=true
 window/stretch/mode="canvas_items"

@@ -1,8 +1,6 @@
 class_name Player
 extends CharacterBody2D
 
-const DASH_COST := 50
-
 var dash_cooldown_timer := 0.0
 
 var is_shooting: bool = false
@@ -18,7 +16,7 @@ var current_state: PlayerState
 @export var dash_speed_multiplier := 2.5
 @export var dash_duration := 0.15
 @export var dash_cooldown := 0.3
-@export var speed := 300.0
+@export var speed := 200.0
 
 func _ready() -> void:
 	current_state = PlayerIdleState.new()

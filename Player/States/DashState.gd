@@ -10,27 +10,33 @@ func enter():
 	if dash_direction == Vector2.ZERO:
 		dash_direction = player.velocity.normalized()
 		if dash_direction == Vector2.ZERO:
-			dash_direction = Vector2.RIGHT 
-			
-	dash_timer = player.dash_duration
+			dash_direction = GameConstants.DASH_DEFAULT_DIRECTION
 	
-	player.animated_sprite_2d.modulate = Color(0.7, 0.7, 1.0, 0.8)
+	dash_timer = GameConstants.DASH_DURATION
+	player.animated_sprite_2d.modulate = GameConstants.DASH_COLOR
 	initial_velocity = player.velocity
 
 func exit():
 	player.animated_sprite_2d.modulate = Color.WHITE
-	player.dash_cooldown_timer = player.dash_cooldown
+	player.dash_cooldown_timer = GameConstants.DASH_COOLDOWN
 
 func update(delta: float):
 	dash_timer -= delta
 	if dash_timer <= 0:
-		if player.get_input_direction() != Vector2.ZERO:
-			transition_to(PlayerMoveState.new())
-		else:
-			transition_to(PlayerIdleState.new())
+		transition_to_idle_or_move()
 	else:
-		player.velocity = dash_direction * player.speed * player.dash_speed_multiplier
+		apply_dash_movement()
 		player.move_and_slide()
+
+func transition_to_idle_or_move():
+	if player.get_input_direction() != Vector2.ZERO:
+		transition_to(PlayerMoveState.new())
+	else:
+		transition_to(PlayerIdleState.new())
+
+func apply_dash_movement():
+	var dash_speed = GameConstants.PLAYER_BASE_SPEED * GameConstants.DASH_SPEED_MULTIPLIER
+	player.velocity = dash_direction * dash_speed
 
 func handle_input(event: InputEvent):
 	pass
