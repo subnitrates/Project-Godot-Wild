@@ -96,6 +96,9 @@ radius = 146.168
 [node name="SlimeEnemy" type="CharacterBody2D" groups=["enemies"]]
 motion_mode = 1
 script = ExtResource("1_30a25")
+min_idle_time = null
+max_idle_time = null
+wander_distance = null
 
 [node name="CanWanderDetection" type="RayCast2D" parent="."]
 target_position = Vector2(0, 0)
@@ -115,7 +118,7 @@ autoplay = "Idle"
 [node name="PlayerDetection" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection"]
-scale = Vector2(1.2, 1.2)
+scale = Vector2(1.76, 1.76)
 shape = SubResource("CircleShape2D_30a25")
 
 [node name="StateTimer" type="Timer" parent="."]
@@ -123,6 +126,3 @@ one_shot = true
 
 [node name="HpBar" parent="." instance=ExtResource("3_8mj0d")]
 position = Vector2(0, -12)
-
-[connection signal="body_entered" from="PlayerDetection" to="." method="_on_ChaseRadius_body_entered"]
-[connection signal="body_exited" from="PlayerDetection" to="." method="_on_ChaseRadius_body_exited"]

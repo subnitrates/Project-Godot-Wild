@@ -95,14 +95,45 @@ position = Vector2(45, 193)
 collision_layer = 3
 collision_mask = 3
 
+[node name="SlimeEnemy" parent="." instance=ExtResource("4_rfcx5")]
+max_health = null
+wander_move_speed = null
+chase_move_speed = null
+experience_reward = null
+
+[node name="SlimeEnemy2" parent="." instance=ExtResource("4_rfcx5")]
+position = Vector2(-147, -4)
+max_health = null
+wander_move_speed = null
+chase_move_speed = null
+experience_reward = null
+
+[node name="SlimeEnemy3" parent="." instance=ExtResource("4_rfcx5")]
+position = Vector2(-154, 67)
+max_health = null
+wander_move_speed = null
+chase_move_speed = null
+experience_reward = null
+
+[node name="SlimeEnemy4" parent="." instance=ExtResource("4_rfcx5")]
+position = Vector2(-161, 150)
+max_health = null
+wander_move_speed = null
+chase_move_speed = null
+experience_reward = null
+
+[node name="SlimeEnemy5" parent="." instance=ExtResource("4_rfcx5")]
+position = Vector2(225, -15)
+max_health = null
+wander_move_speed = null
+chase_move_speed = null
+experience_reward = null
+
 [node name="SpawnerBase" parent="." instance=ExtResource("5_wjemx")]
 position = Vector2(392, 279)
 
 [node name="Camera2D" parent="." instance=ExtResource("6_nhbgr")]
-position = Vector2(49, 194)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="GameUI" parent="CanvasLayer" instance=ExtResource("1_nhbgr")]
-
-[node name="SlimeEnemy" parent="." instance=ExtResource("4_rfcx5")]

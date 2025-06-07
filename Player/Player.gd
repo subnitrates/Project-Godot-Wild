@@ -5,8 +5,10 @@ var dash_cooldown_timer := 0.0
 var is_shooting: bool = false
 var current_state: PlayerState
 
+@onready var sprite_anchor = $SpriteAnchor
+@onready var sprite = $SpriteAnchor/AnimatedSprite2D
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
-@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var animated_sprite_2d: AnimatedSprite2D = %AnimatedSprite2D
 @onready var hover_gun = $HoverGun
 @onready var player_stats = $PlayerStats
 @onready var hp_bar: TextureProgressBar = %HPBar
@@ -23,6 +25,7 @@ func _ready() -> void:
 	hp_bar.value = player_stats.health
 	stamina_bar.value = player_stats.stamina
 	stamina_bar.max_value = player_stats.max_stamina
+
 
 func _physics_process(delta: float) -> void:
 	if dash_cooldown_timer > 0:

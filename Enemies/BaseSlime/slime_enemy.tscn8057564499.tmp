@@ -115,7 +115,7 @@ autoplay = "Idle"
 [node name="PlayerDetection" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection"]
-scale = Vector2(1.2, 1.2)
+scale = Vector2(1.76, 1.76)
 shape = SubResource("CircleShape2D_30a25")
 
 [node name="StateTimer" type="Timer" parent="."]
@@ -123,6 +123,3 @@ one_shot = true
 
 [node name="HpBar" parent="." instance=ExtResource("3_8mj0d")]
 position = Vector2(0, -12)
-
-[connection signal="body_entered" from="PlayerDetection" to="." method="_on_ChaseRadius_body_entered"]
-[connection signal="body_exited" from="PlayerDetection" to="." method="_on_ChaseRadius_body_exited"]

@@ -38,13 +38,42 @@ const BULLET_DEFAULT_LIFETIME: float = 2.0
 
 # --- Enemy Defaults --- #
 # These can be used as default values for enemies,
-const ENEMY_DEFAULT_MAX_HEALTH: int = 5
-const ENEMY_DEFAULT_WANDER_SPEED: int = 30
-const ENEMY_DEFAULT_CHASE_SPEED: int = 60
-const ENEMY_DEFAULT_WANDER_DISTANCE: float = 50.0
-const ENEMY_DEFAULT_MIN_IDLE_TIME: float = 0.8
-const ENEMY_DEFAULT_MAX_IDLE_TIME: float = 2.0
-const ENEMY_DEFAULT_XP_REWARD: int = 25
+const EnemyStats: Dictionary = {
+	"DEFAULT": {
+		"max_health": 15,
+		"wander_speed": 10,
+		"chase_speed": 10,
+		"wander_distance": 10.0,
+		"min_idle_time": 10.0,
+		"max_idle_time": 20.0,
+		"xp_reward": 100
+	},
+	"SLIME": {
+		"max_health": 50,
+		"wander_speed": 20,
+		"chase_speed": 40,
+		"wander_distance": 30.0,
+		"min_idle_time": 2.0,
+		"max_idle_time": 5.0,
+		"xp_reward": 15
+	},
+	"GIGA_SLIME": {
+		"max_health": 200,
+		"wander_speed": 30,
+		"chase_speed": 30,
+		"wander_distance": 100.0,
+		"min_idle_time": 0.5,
+		"max_idle_time": 1.5,
+		"xp_reward": 30
+	}
+}
+
+# Spawner 
+const SPAWNER_DEFAULT_MAX_HEALTH: int = 100
+const SPAWNER_DEFAULT_SPAWN_COUNT: int = 3
+const SPAWNER_DEFAULT_MAX_ENEMIES: int = 10
+const SPAWNER_DEFAULT_SPAWN_RADIUS: float = 100.0
+const SPAWNER_DEFAULT_SPAWN_INTERVAL: float = 5.0
 
 # --- Collectible Defaults --- #
 const COIN_DEFAULT_VALUE: int = 1

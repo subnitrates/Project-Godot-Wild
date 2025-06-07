@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bkjp8rp5pqdv4"]
+
+[ext_resource type="Script" uid="uid://dclbjmbtk2syy" path="res://Zones/camera_2d.gd" id="1_cr4wk"]
+
+[node name="Camera2D" type="Camera2D"]
+position_smoothing_enabled = true
+script = ExtResource("1_cr4wk")
+target_node_path = NodePath("../Player")

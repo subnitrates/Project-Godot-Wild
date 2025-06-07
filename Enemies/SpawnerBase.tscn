@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=3 uid="uid://cx5e0f2ll4aeo"]
+
+[ext_resource type="Script" uid="uid://cxaup2sbdm2d" path="res://Enemies/SpawnerBase.gd" id="1_jehxn"]
+[ext_resource type="PackedScene" uid="uid://cidsjxc3oyxu1" path="res://Enemies/BaseSlime/slime_enemy.tscn" id="2_gkseg"]
+[ext_resource type="Texture2D" uid="uid://bx3n3lul4rvh6" path="res://Assets/sprites/NinjaAdventure/Items/Object/CrateEmpty.png" id="3_gkseg"]
+[ext_resource type="PackedScene" uid="uid://bcjriavf2wbx5" path="res://Enemies/HPBar.tscn" id="4_mdngq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mdngq"]
+radius = 77.1622
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gkseg"]
+
+[node name="EnemySpawner" type="StaticBody2D"]
+script = ExtResource("1_jehxn")
+enemy_scene = ExtResource("2_gkseg")
+
+[node name="SpawnTimer" type="Timer" parent="."]
+
+[node name="ActivationArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActivationArea"]
+scale = Vector2(3.24, 3.24)
+shape = SubResource("CircleShape2D_mdngq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_gkseg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_gkseg")
+
+[node name="HpBar" parent="." instance=ExtResource("4_mdngq")]
+position = Vector2(0, -11)

@@ -1,20 +1,28 @@
 extends EnemyBase
 class_name SlimeEnemy
 
-# --- Engine Functions ---
+
 func _ready() -> void:
-	# The 'super' keyword calls the _ready() function from the parent class (EnemyBase)
+	self.enemy_type = "SLIME"
 	super()
 
 # --- Overridden Functions ---
+func set_state(new_state: EnemyState) -> void:
+	if current_state == new_state:
+		return
+		
+	super.set_state(new_state)
+
+	match new_state:
+		EnemyState.IDLE:
+			sprite.play("Idle")
+		EnemyState.WANDERING:
+			sprite.play("Idle")
+		EnemyState.CHASING:
+			sprite.play("Jump")
+
 func _on_health_depleted() -> void:
-	super() 
-
-func _enter_idle_state() -> void:
-	super()
-
-func _enter_wandering_state() -> void:
-	super()
-
-func _chase_player() -> void:
-	super()
+	set_physics_process(false)
+	$CollisionShape2D.set_deferred("disabled", true)
+	self.hide()
+	super._on_health_depleted()

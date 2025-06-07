@@ -5,125 +5,140 @@ extends CharacterBody2D
 class_name EnemyBase
 
 # --- Enums and Signals ---
-enum EnemyStates {
-	IDLE,
-	WANDERING,
-	CHASING
-}
+enum EnemyState { IDLE, WANDERING, CHASING }
 signal health_depleted
 
-# --- Exports ---
-@export var min_idle_time: float = GameConstants.ENEMY_DEFAULT_MIN_IDLE_TIME
-@export var max_idle_time: float = GameConstants.ENEMY_DEFAULT_MAX_IDLE_TIME
-@export var wander_distance: float = GameConstants.ENEMY_DEFAULT_WANDER_DISTANCE
-@export var max_health: int = GameConstants.ENEMY_DEFAULT_MAX_HEALTH
-@export var wander_move_speed: int = GameConstants.ENEMY_DEFAULT_WANDER_SPEED
-@export var chase_move_speed: int = GameConstants.ENEMY_DEFAULT_CHASE_SPEED
-@export var experience_reward: int = GameConstants.ENEMY_DEFAULT_XP_REWARD
+@export var enemy_type: String = "DEFAULT"
 
-# --- OnReady Variables ---
-@onready var sprite_anim_player: AnimatedSprite2D = $AnimatedSprite2D
+
+# --- Nodes ---
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var player_detection: Area2D = $PlayerDetection
-@onready var idle_timer: Timer = $IdleTimer 
-@onready var wander_timer: Timer = $WanderTimer
+@onready var state_timer: Timer = $StateTimer 
+@onready var hp_bar: Node2D = $HpBar if has_node("HpBar") else null
 
 # --- State Variables ---
 var current_health: int
-var current_enemy_state: EnemyStates = EnemyStates.IDLE
-var player_to_chase: CharacterBody2D
-var wander_pos_to: Vector2 = Vector2.ZERO
+var current_state: EnemyState = EnemyState.IDLE
+var player_ref: Player 
+var min_idle_time: float
+var max_idle_time: float
+var wander_distance: float
+var max_health: int
+var wander_speed: float
+var chase_speed: float
+var experience_reward: int
+
+# --- Private Variables ---
+var _wander_target_pos := Vector2.ZERO
 
 # --- Engine Functions ---
 func _ready() -> void:
+	var stats = GameConstants.EnemyStats.get(enemy_type)
+	if not stats:
+		push_warning("Enemy stats for type '%s' not found! Using DEFAULT." % enemy_type)
+		stats = GameConstants.EnemyStats.DEFAULT
+
+	max_health = stats.max_health
+	wander_speed = stats.wander_speed
+	chase_speed = stats.chase_speed
+	wander_distance = stats.wander_distance
+	min_idle_time = stats.min_idle_time
+	max_idle_time = stats.max_idle_time
+	experience_reward = stats.xp_reward
 	current_health = max_health
 	
-	idle_timer.timeout.connect(_on_idle_timeout)
-	wander_timer.timeout.connect(_on_wander_target_reached_or_timeout)
 	player_detection.body_entered.connect(_on_player_spotted)
 	player_detection.body_exited.connect(_on_player_lost)
+	state_timer.timeout.connect(_on_state_timer_timeout)
 	health_depleted.connect(_on_health_depleted)
+	if hp_bar:
+		hp_bar.update_bar(current_health, max_health)
 
-	call_deferred("_enter_idle_state")
+	call_deferred("set_state", EnemyState.IDLE)
 
-func _physics_process(_delta: float) -> void:
-	match current_enemy_state:
-		EnemyStates.CHASING:
-			_chase_player()
-		EnemyStates.WANDERING:
-			_wander_to_pos()
-		EnemyStates.IDLE:
-			velocity = Vector2.ZERO 
+func _physics_process(delta: float) -> void:
+	match current_state:
+		EnemyState.IDLE:
+			velocity = velocity.move_toward(Vector2.ZERO, 200 * delta)
+		
+		EnemyState.WANDERING:
+			var direction_to_wander = global_position.direction_to(_wander_target_pos)
+			velocity = velocity.move_toward(direction_to_wander * wander_speed, 100 * delta)
+			
+			# Check if we've reached the destination or hit a wall
+			if global_position.distance_to(_wander_target_pos) < 5.0 or is_on_wall():
+				set_state(EnemyState.IDLE)
+
+		EnemyState.CHASING:
+			if not is_instance_valid(player_ref):
+				set_state(EnemyState.IDLE)
+				return
+			
+			var direction_to_player = global_position.direction_to(player_ref.global_position)
+			velocity = velocity.move_toward(direction_to_player * chase_speed, 150 * delta)
 	
 	move_and_slide()
+	# Flip sprite based on movement direction
+	if abs(velocity.x) > 1:
+		sprite.flip_h = velocity.x < 0
 
-# --- State Management ---
-func _enter_idle_state() -> void:
-	current_enemy_state = EnemyStates.IDLE
-	idle_timer.wait_time = randf_range(min_idle_time, max_idle_time)
-	idle_timer.start()
-
-func _enter_wandering_state() -> void:
-	current_enemy_state = EnemyStates.WANDERING
-	
-	var random_direction = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
-	wander_pos_to = global_position + random_direction * wander_distance
-	
-	var distance_to_target = global_position.distance_to(wander_pos_to)
-	var time_to_reach_target = distance_to_target / wander_move_speed
-	wander_timer.wait_time = time_to_reach_target + 0.5 
-	wander_timer.start()
-
-# --- State Logic ---
-func _wander_to_pos() -> void:
-	if current_enemy_state != EnemyStates.WANDERING:
+# --- State Machine ---
+func set_state(new_state: EnemyState) -> void:
+	if current_state == new_state:
 		return
+
+	# Exit the current state to clean up timers and logic
+	match current_state:
+		EnemyState.WANDERING:
+			state_timer.stop() # Stop wander timeout if interrupted
 	
-	velocity = global_position.direction_to(wander_pos_to) * wander_move_speed
+	# Enter the new state
+	match new_state:
+		EnemyState.IDLE:
+			state_timer.start(randf_range(min_idle_time, max_idle_time))
 
-	if global_position.distance_to(wander_pos_to) <= 2 or is_on_wall():
-		_on_wander_target_reached_or_timeout()
+		EnemyState.WANDERING:
+			var random_direction = Vector2.from_angle(randf_range(0, TAU))
+			_wander_target_pos = global_position + random_direction * randf_range(wander_distance * 0.5, wander_distance)
+			# Set a fallback timeout in case the enemy gets stuck
+			state_timer.start(5.0) 
 
-func _chase_player() -> void:
-	if not is_instance_valid(player_to_chase):
-		_enter_idle_state()
-		return
+		EnemyState.CHASING:
+			state_timer.stop() 
 	
-	var chase_dir: Vector2 = (player_to_chase.global_position - self.global_position).normalized()
-	velocity = chase_dir * chase_move_speed
-
-# --- Signal Callbacks ---
-func _on_idle_timeout() -> void:
-	_enter_wandering_state()
-
-func _on_wander_target_reached_or_timeout() -> void:
-	wander_timer.stop()
-	_enter_idle_state()
-
-func _on_player_spotted(body: Node2D) -> void:
-	if not body is Player: return # checks for player class
-	if current_enemy_state == EnemyStates.CHASING: return
-	
-	idle_timer.stop()
-	wander_timer.stop()
-	
-	player_to_chase = body
-	current_enemy_state = EnemyStates.CHASING
-
-func _on_player_lost(body: Node2D) -> void:
-	if body == player_to_chase:
-		player_to_chase = null
-		call_deferred("_enter_idle_state")
-
-func _on_health_depleted() -> void:
-	var player = get_tree().get_first_node_in_group("player")
-	if is_instance_valid(player):
-		var player_stats = player.find_child("PlayerStats")
-		if is_instance_valid(player_stats) and player_stats.has_method("add_experience"):
-			player_stats.add_experience(experience_reward)
-	queue_free()
+	current_state = new_state
 
 # --- Public Functions ---
 func take_damage(damage_amount: int) -> void:
-	current_health -= damage_amount
-	if current_health <= 0:
+	current_health = max(0, current_health - damage_amount)
+	if hp_bar:
+		hp_bar.update_bar(current_health, max_health)
+
+	if current_health == 0:
 		health_depleted.emit()
+
+# --- Signal Callbacks ---
+func _on_state_timer_timeout() -> void:
+	if current_state == EnemyState.IDLE:
+		set_state(EnemyState.WANDERING)
+	elif current_state == EnemyState.WANDERING:
+		# Fallback triggered (enemy likely got stuck)
+		set_state(EnemyState.IDLE)
+
+func _on_player_spotted(body: Node2D) -> void:
+	if body is Player:
+		player_ref = body
+		set_state(EnemyState.CHASING)
+
+func _on_player_lost(body: Node2D) -> void:
+	if body == player_ref:
+		player_ref = null
+		set_state(EnemyState.IDLE)
+
+func _on_health_depleted() -> void:
+	var player_nodes = get_tree().get_nodes_in_group("player")
+	if not player_nodes.is_empty() and player_nodes[0].has_method("add_experience"):
+		player_nodes[0].add_experience(experience_reward)
+	
+	queue_free()
