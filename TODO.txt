@@ -1,17 +1,23 @@
 # TO DO List:
-	1. Code player
+Code starting zone
+	Area? 
+		NPC? Story?
+	Tutorial?
+		1. User input display visually as they walk by
 
-	2. Code enemy
-		a. Movement
-			I. Animations
-			II. Code
-		b. Game AI
-			I. Walks around randomly
-			II. Spots player
-			III Chases player until death
-		d. Health
-			II. Code
+Code level 0 zone:
+	Basic dungeon crawl style map
+	Slime enemies
+		Slime spawner the player has to destroy? 
+		
+Player Systems:
+	EXP: animation to show exp? orbs to collect?
+	Weapon: Switch to new weapons? General upgrade system or per weapon
+			style or mixed?
+	Bullet: Can use different ammo types, different damage? upgraded ammo
+			from a level upgrade?
 
-	3. Code starting zone
-		a. Tilemap
-		b. ????
+Enemie Systems:
+	Base Enemy: More behaviors at base in AI? 
+	Enemy Slime: Shoot a slime proj aoe?
+	Giga Slime: Larger, stronger, maybe different color, splits into three base slimes? 
