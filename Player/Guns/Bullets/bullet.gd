@@ -1,8 +1,8 @@
 extends Area2D
 
-@export var speed: float = 800.0
-@export var damage: int = 10
-@export var lifetime: float = 2.0
+@export var speed: float = GameConstants.BULLET_DEFAULT_SPEED
+@export var damage: int = GameConstants.BULLET_DEFAULT_DAMAGE
+@export var lifetime: float = GameConstants.BULLET_DEFAULT_LIFETIME
 
 var direction: Vector2 = Vector2.RIGHT
 

@@ -6,13 +6,14 @@ signal stamina_changed(old_value, new_value)
 signal coins_changed(old_value, new_value)
 signal player_died
 
-@export var max_health := 100
-@export var max_stamina := 100
-@export var starting_coins := 0
-@export var stamina_regen_rate := 40.0 
-@export var stamina_regen_delay := 1.0 
+@export var max_health: int = GameConstants.PLAYER_DEFAULT_MAX_HEALTH
+@export var max_stamina: int = GameConstants.PLAYER_DEFAULT_MAX_STAMINA
+@export var starting_coins: int = GameConstants.PLAYER_DEFAULT_STARTING_COINS
+@export var stamina_regen_rate: float = GameConstants.PLAYER_DEFAULT_STAMINA_REGEN_RATE
+@export var stamina_regen_delay: float = GameConstants.PLAYER_DEFAULT_STAMINA_REGEN_DELAY
 
 var stamina_regen_timer := 0.0
+var _stamina_regen_accumulator: float = 0.0
 
 var health: int:
 	set(value):
@@ -33,8 +34,6 @@ var coins: int:
 		var old_coins = coins
 		coins = max(0, value)
 		coins_changed.emit(old_coins, coins)
-
-var _stamina_regen_accumulator: float = 0.0
 
 func _ready():
 	health = max_health
