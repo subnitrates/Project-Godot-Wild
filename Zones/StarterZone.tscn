@@ -1280,18 +1280,15 @@ texture = ExtResource("20_2qvm0")
 position = Vector2(449, -138)
 texture = ExtResource("18_e0tfr")
 
-[node name="Node2D" type="Node2D" parent="GroundLayer/TutorialHut"]
+[node name="Keybindings" type="Node2D" parent="GroundLayer/TutorialHut"]
 
-[node name="Sprite2D" type="Sprite2D" parent="GroundLayer/TutorialHut/Node2D"]
-position = Vector2(346, -286)
-
-[node name="LeftMouseClick" type="AnimatedSprite2D" parent="GroundLayer/TutorialHut/Node2D"]
+[node name="LeftMouseClick" type="AnimatedSprite2D" parent="GroundLayer/TutorialHut/Keybindings"]
 position = Vector2(113, 266)
 scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_lgjp5")
-frame_progress = 0.0864332
+frame_progress = 0.20784
 
-[node name="Label" type="Label" parent="GroundLayer/TutorialHut/Node2D"]
+[node name="Label" type="Label" parent="GroundLayer/TutorialHut/Keybindings"]
 offset_left = 90.0
 offset_top = 228.0
 offset_right = 135.0

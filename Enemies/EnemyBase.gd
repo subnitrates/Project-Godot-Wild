@@ -19,6 +19,7 @@ signal health_depleted
 @export var max_health: int = GameConstants.ENEMY_DEFAULT_MAX_HEALTH
 @export var wander_move_speed: int = GameConstants.ENEMY_DEFAULT_WANDER_SPEED
 @export var chase_move_speed: int = GameConstants.ENEMY_DEFAULT_CHASE_SPEED
+@export var experience_reward: int = GameConstants.ENEMY_DEFAULT_XP_REWARD
 
 # --- OnReady Variables ---
 @onready var sprite_anim_player: AnimatedSprite2D = $AnimatedSprite2D
@@ -114,6 +115,11 @@ func _on_player_lost(body: Node2D) -> void:
 		call_deferred("_enter_idle_state")
 
 func _on_health_depleted() -> void:
+	var player = get_tree().get_first_node_in_group("player")
+	if is_instance_valid(player):
+		var player_stats = player.find_child("PlayerStats")
+		if is_instance_valid(player_stats) and player_stats.has_method("add_experience"):
+			player_stats.add_experience(experience_reward)
 	queue_free()
 
 # --- Public Functions ---
